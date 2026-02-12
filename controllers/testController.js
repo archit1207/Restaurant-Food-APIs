@@ -1,0 +1,10 @@
+const testUserController = (req,res) => {
+    try{
+        res.status(200).send('<h1>Test User API working </h1>');
+    }
+    catch (error) {
+        console.log("Error in Test API", error);
+    }
+}
+
+module.exports = { testUserController };
