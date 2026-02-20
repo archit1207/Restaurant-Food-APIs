@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const colors = require("colors");
 
 //function mmongodb dfatabase connection
 const connectDb = async () => {

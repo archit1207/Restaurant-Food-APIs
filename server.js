@@ -3,9 +3,11 @@ const colors = require("colors");
 const cors = require("cors");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
-const Router = require("./routes/testRoutes");
 const connectDB = require("./config/db.js");
+
 const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
+const restaurantRoutes = require('./routes/restaurantRoutes');
 
 //dot env configuration
 dotenv.config();
@@ -23,9 +25,12 @@ app.use(morgan("dev"));
 
 //route
 //URL => http://localhost:8080
-app.use('/api/v1/test', Router);
 
 app.use('/api/v1/auth', authRoutes);
+
+app.use('/api/v1/user', userRoutes);
+
+app.use('/api/v1/restaurant', restaurantRoutes);
 
 
 app.get('/', (req,res) => {

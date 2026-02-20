@@ -1,13 +1,14 @@
 const { hash } = require("bcryptjs");
 const userModels = require("../models/userModels");
 const bcrypt = require("bcrypt");
+const JWT = require("jsonwebtoken");
 
 const registerController = async (req, res) => {
     try {
-        const { username, email, password, phone, address } = req.body
+        const { username, email, password, phone, address, answer } = req.body
 
         //Validation
-        if (!username || !email || !password || !phone || !address) {
+        if (!username || !email || !password || !phone || !address || !answer) {
             return res.status(500).send({
                 success: false,
                 message: "Please fill all the Required Fields"
@@ -48,8 +49,9 @@ const registerController = async (req, res) => {
             username,
             email,
             password: hashedPassword,
+            address,
             phone,
-            address
+            answer,
         })
         res.status(201).send({
             success: true,
@@ -84,11 +86,34 @@ const loginController = async (req, res) => {
                 message: "User not Found"
             })
         }
+
+        //check user pasword || compare password
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(200).send({
+                success: false,
+                message: "Invalid Credentials"
+            })
+        }
+
+        //token
+        const token = JWT.sign({ id: user._id }, process.env.JWT_SECRET, {
+            expiresIn: "7d",
+        })
+
+
         res.status(200).send({
             success: true,
             message: "Login Successfully",
-            user,
-        })
+            token,
+            user: {
+                _id: user._id,
+                username: user.username,
+                email: user.email,
+                phone: user.phone,
+                userType: user.userType,
+            }
+        });
     } catch (error) {
         console.log(error);
         res.status(500).send({
@@ -98,4 +123,7 @@ const loginController = async (req, res) => {
     }
 }
 
-module.exports = { registerController, loginController };
+module.exports = { 
+    registerController, 
+    loginController
+};
