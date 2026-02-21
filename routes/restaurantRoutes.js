@@ -12,9 +12,9 @@ router.post('/create',authMiddleware, createRestaurantController)
 router.get('/allrestaurant',authMiddleware, getAllRestaurantController)
 
 // Get RESTAURANT by ID || GET
-router.get('/restaurant',authMiddleware, getRestaurantController)
+router.get('/getrestaurant/:id',authMiddleware, getRestaurantController)
 
 // DELETE RESTAURANT || DELETE
-router.delete('/deleterestaurant',authMiddleware, deleteRestaurantController)
+router.delete('/deleterestaurant/:id',authMiddleware, deleteRestaurantController)
 
 module.exports = router;
