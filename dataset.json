@@ -1,0 +1,85 @@
+[
+  {
+    "title": "Spice Villa",
+    "imageUrl": "https://example.com/images/spice-villa.jpg",
+    "foods": [
+      "Butter Chicken",
+      "Garlic Naan",
+      "Paneer Tikka",
+      "Biryani"
+    ],
+    "time": "30-40 min",
+    "pickup": true,
+    "delivery": true,
+    "isOpen": true,
+    "logoUrl": "https://example.com/logos/spice-villa.png",
+    "rating": 4.5,
+    "ratingCount": "1.2k",
+    "code": "SV123",
+    "coords": {
+      "id": "loc101",
+      "latitude": 28.6139,
+      "latitudeDelta": 0.015,
+      "longitude": 77.2090,
+      "longitudeDelta": 0.0121,
+      "address": "Connaught Place, New Delhi",
+      "title": "Spice Villa - New Delhi"
+    }
+  },
+
+  {
+    "title": "Urban Bites",
+    "imageUrl": "https://example.com/images/urban-bites.jpg",
+    "foods": [
+      "Cheese Burger",
+      "Fries",
+      "Grilled Sandwich",
+      "Cold Coffee"
+    ],
+    "time": "20-30 min",
+    "pickup": true,
+    "delivery": true,
+    "isOpen": false,
+    "logoUrl": "https://example.com/logos/urban-bites.png",
+    "rating": 4.2,
+    "ratingCount": "850",
+    "code": "UB876",
+    "coords": {
+      "id": "loc102",
+      "latitude": 19.0760,
+      "latitudeDelta": 0.022,
+      "longitude": 72.8777,
+      "longitudeDelta": 0.015,
+      "address": "Bandra West, Mumbai",
+      "title": "Urban Bites - Mumbai"
+    }
+  },
+
+  {
+    "title": "Green Bowl Café",
+    "imageUrl": "https://example.com/images/green-bowl.jpg",
+    "foods": [
+      "Veg Salad",
+      "Smoothies",
+      "Quinoa Bowl",
+      "Avocado Toast"
+    ],
+    "time": "15-25 min",
+    "pickup": true,
+    "delivery": false,
+    "isOpen": true,
+    "logoUrl": "https://example.com/logos/green-bowl.png",
+    "rating": 4.8,
+    "ratingCount": "2.4k",
+    "code": "GB542",
+    "coords": {
+      "id": "loc103",
+      "latitude": 12.9716,
+      "latitudeDelta": 0.018,
+      "longitude": 77.5946,
+      "longitudeDelta": 0.014,
+      "address": "Indiranagar, Bangalore",
+      "title": "Green Bowl Café - Bangalore"
+    }
+  }
+]

@@ -12,7 +12,7 @@ const restaurantSchema = new mongoose.Schema({
         type: String,
         default: ''
     },
-    food: {
+    foods: {
         type: Array
     },
     time: {
@@ -23,10 +23,6 @@ const restaurantSchema = new mongoose.Schema({
         default: true
     },
     delivery: {
-        type: Boolean,
-        default: true
-    },
-    isOpen: {
         type: Boolean,
         default: true
     },
