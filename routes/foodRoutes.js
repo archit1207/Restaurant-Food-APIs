@@ -40,7 +40,7 @@ router.post("/placeorder", authMiddleware, placeOrderController);
 
 // ORDER STATUS
 router.post(
-  "/orderStatus/:id",
+  "/orderstatus/:id",
   authMiddleware,
   adminMiddleware,
   orderStatusController

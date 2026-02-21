@@ -1,21 +1,25 @@
-const userModel = require("../models/userModel");
-
-module.exports = async (req, res, next) => {
+module.exports = (req, res, next) => {
   try {
-    const user = await userModel.findById(req.body.id);
-    if (user.usertype !== "admin") {
+    if (!req.user) {
       return res.status(401).send({
         success: false,
-        message: "Only Admin ACess ",
+        message: "Unauthorized - No user found",
       });
-    } else {
-      next();
     }
+
+    if (req.user.userType !== "Admin") {
+      return res.status(403).send({
+        success: false,
+        message: "Only Admin Access",
+      });
+    }
+
+    next();
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
-      message: "Un-AUthorized ACCESS",
+      message: "Unauthorized access",
       error,
     });
   }

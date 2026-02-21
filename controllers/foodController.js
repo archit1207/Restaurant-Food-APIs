@@ -1,4 +1,4 @@
-const foodModal = require("../models/foodModel");
+const foodModel = require("../models/foodModel");
 const orderModel = require("../models/orderModel");
 
 // CREATE FOOD
@@ -13,17 +13,17 @@ const createFoodController = async (req, res) => {
       catgeory,
       code,
       isAvailabe,
-      resturnat,
+      restaurant: restaurant,
       rating,
     } = req.body;
 
-    if (!title || !description || !price || !resturnat) {
+    if (!title || !description || !price || !restaurant) {
       return res.status(500).send({
         success: false,
         message: "Please Provide all fields",
       });
     }
-    const newFood = new foodModal({
+    const newFood = new foodModel({
       title,
       description,
       price,
@@ -32,7 +32,7 @@ const createFoodController = async (req, res) => {
       catgeory,
       code,
       isAvailabe,
-      resturnat,
+      restaurant: restaurant,
       rating,
     });
 
@@ -55,7 +55,7 @@ const createFoodController = async (req, res) => {
 // GET ALLL FOODS
 const getAllFoodsController = async (req, res) => {
   try {
-    const foods = await foodModal.find({});
+    const foods = await foodModel.find({});
     if (!foods) {
       return res.status(404).send({
         success: false,
@@ -87,7 +87,7 @@ const getSingleFoodController = async (req, res) => {
         message: "please provide id",
       });
     }
-    const food = await foodModal.findById(foodId);
+    const food = await foodModel.findById(foodId);
     if (!food) {
       return res.status(404).send({
         success: false,
@@ -118,7 +118,7 @@ const getFoodByResturantController = async (req, res) => {
         message: "please provide id",
       });
     }
-    const food = await foodModal.find({ resturnat: resturantId });
+    const food = await foodModel.find({ restaurant: resturantId });
     if (!food) {
       return res.status(404).send({
         success: false,
@@ -150,7 +150,7 @@ const updateFoodController = async (req, res) => {
         message: "no food id was found",
       });
     }
-    const food = await foodModal.findById(foodID);
+    const food = await foodModel.findById(foodID);
     if (!food) {
       return res.status(404).send({
         success: false,
@@ -166,10 +166,10 @@ const updateFoodController = async (req, res) => {
       catgeory,
       code,
       isAvailabe,
-      resturnat,
+      restaurant,
       rating,
     } = req.body;
-    const updatedFood = await foodModal.findByIdAndUpdate(
+    const updatedFood = await foodModel.findByIdAndUpdate(
       foodID,
       {
         title,
@@ -180,7 +180,7 @@ const updateFoodController = async (req, res) => {
         catgeory,
         code,
         isAvailabe,
-        resturnat,
+        restaurant,
         rating,
       },
       { new: true }
@@ -209,23 +209,23 @@ const deleteFoodController = async (req, res) => {
         message: "provide food id",
       });
     }
-    const food = await foodModal.findById(foodId);
+    const food = await foodModel.findById(foodId);
     if (!food) {
       return res.status(404).send({
         success: false,
         message: "No Food Found with id",
       });
     }
-    await foodModal.findByIdAndDelete(foodId);
+    await foodModel.findByIdAndDelete(foodId);
     res.status(200).send({
       success: true,
-      message: "Food Item Dleeted ",
+      message: "Food Item Deleted ",
     });
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
-      message: "Eror In Delete Food APi",
+      message: "Error In Delete Food APi",
       error,
     });
   }

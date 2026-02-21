@@ -1,8 +1,8 @@
 const JWT = require("jsonwebtoken");
+const userModel = require("../models/userModels");
 
 module.exports = async (req, res, next) => {
   try {
-    // Fetch token
     const token = req.headers.authorization?.split(" ")[1];
 
     if (!token) {
@@ -12,25 +12,27 @@ module.exports = async (req, res, next) => {
       });
     }
 
-    JWT.verify(token, process.env.JWT_SECRET, (error, decoded) => {
-      if (error) {
-        return res.status(401).send({
-          success: false,
-          message: "Unauthorized User",
-          error,
-        });
-      }
+    const decoded = JWT.verify(token, process.env.JWT_SECRET);
 
-      // FIX: store decoded user in req.user
-      req.user = decoded;
+    // Fetch user from DB using decoded.id
+    const user = await userModel.findById(decoded.id).select("-password");
 
-      next();
-    });
+    if (!user) {
+      return res.status(401).send({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    // Store full user object
+    req.user = user;
+
+    next();
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
-      message: "Error in Auth API",
+      message: "Auth failed",
       error,
     });
   }
